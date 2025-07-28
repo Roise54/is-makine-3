@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımızda | İş Makineleri Yıkamada Profesyonel Çözümler</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1a365d",
+                        secondary: "#4a5568",
+                        accent: "#dd6b20",
+                        neutral: "#f7fafc",
+                        dark: "#2d3748",
+                        light: "#e2e8f0",
+                        success: "#38a169",
+                        warning: "#d69e2e",
+                        danger: "#e53e3e"
+                    },
+                    borderRadius: {
+                        none: "0px",
+                        sm: "4px",
+                        DEFAULT: "8px",
+                        md: "12px",
+                        lg: "16px",
+                        xl: "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        full: "9999px",
+                        button: "8px",
+                    },
+                    fontFamily: {
+                        sans: ['"Poppins"', 'sans-serif'],
+                        heading: ['"Montserrat"', 'sans-serif'],
+                        logo: ['"Roboto Condensed"', 'sans-serif']
+                    }
+                },
+            },
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Poppins:wght@400;600&family=Roboto+Condensed:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        /* CSS variables for consistency with Tailwind colors, though Tailwind classes are preferred */
+        :root {
+            --primary: #1a365d;
+            --secondary: #4a5568;
+            --accent: #dd6b20;
+            --neutral: #f7fafc;
+            --dark: #2d3748;
+            --light: #e2e8f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 80px; /* Fixed navbar height */
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--neutral); /* Using CSS variable */
+            color: var(--secondary); /* Using CSS variable */
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); /* Using CSS variables */
+            height: 80px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            position: relative;
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .nav-item:hover {
+            color: var(--accent); /* Using CSS variable */
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent); /* Using CSS variable */
+            transition: width 0.3s;
+        }
+        
+        .nav-item:hover::after, .nav-item.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); /* Using CSS variables */
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        /* LOGO STİLLERİ */
+        .logo-container {
+            width: 80px; /* Increased for better visibility */
+            height: 80px; /* Increased for better visibility */
+            background-color: var(--accent); /* Using CSS variable */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Hero Section - if needed, not directly in Hakkimizda */
+        .hero-section {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Service Card Hover Effect */
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Video Container Styles */
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 54, 93, 0.2); /* Using primary color with opacity */
+            z-index: 1;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Custom Input and Button Styles */
+        .custom-input {
+            border: 1px solid var(--light); /* Using CSS variable */
+            transition: all 0.3s ease;
+        }
+
+        .custom-input:focus {
+            border-color: var(--primary); /* Using CSS variable */
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .custom-button {
+            transition: all 0.3s ease;
+        }
+
+        .custom-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stats Item Separator */
+        .stats-item {
+            position: relative;
+        }
+
+        .stats-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background-color: rgba(74, 85, 104, 0.3); /* Using secondary color with opacity */
+        }
+
+        .stats-item:last-child::after {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .stats-item::after {
+                display: none;
+            }
+        }
+
+        /* Modern gradient background */
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); /* Using CSS variables */
+        }
+
+        /* Modern card hover effect */
+        .modern-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .modern-card:hover {
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Animated underline (if used) */
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent); /* Using CSS variable */
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .animated-underline:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* Floating animation (if used) */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Dropdown menu styles */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 280px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border-radius: 8px;
+            padding: 10px 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            color: var(--primary); /* Using CSS variable */
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent); /* Using CSS variable */
+            transition: width 0.3s ease;
+        }
+
+        .dropdown-menu a:hover::before {
+            width: 100%;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: var(--neutral); /* Using CSS variable */
+            color: var(--primary); /* Using CSS variable */
+            padding-left: 20px;
+        }
+        .dropdown-menu a.active {
+            background-color: var(--light); /* Using CSS variable */
+            color: var(--primary); /* Using CSS variable */
+            font-weight: 600;
+        }
+        .dropdown-menu a.active::before {
+            width: 100%;
+        }
+
+
+        /* WhatsApp button styles */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Call button styles */
+        .call-button {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent); /* Using CSS variable */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .call-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Professional footer */
+        .professional-footer {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a4365 100%); /* Using CSS variables and hex */
+            border-top: 4px solid var(--accent); /* Using CSS variable */
+            color: white; /* Ensure text is white */
+        }
+
+        /* Footer links */
+        .footer-link {
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent); /* Using CSS variable */
+            transform: translateX(5px);
+        }
+
+        /* Mission Vision Values Cards */
+        .mv-card {
+            border-left: 4px solid var(--accent); /* Using CSS variable */
+            transition: all 0.3s ease;
+        }
+
+        .mv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-neutral font-sans text-secondary">
+    <a href="https://wa.me/905555555555?text=Merhaba,yıkama%20hakkında%20bilgi%20almak%20istiyordum."
+        class="whatsapp-button" target="_blank">
+        <i class="ri-whatsapp-fill"></i>
+    </a>
+
+    <a href="tel:+905555555555" class="call-button">
+        <i class="ri-phone-fill"></i>
+    </a>
+
+    <header class="fixed top-0 left-0 w-full h-20 gradient-bg bg-opacity-95 z-50 shadow-md">
+        <nav class="container mx-auto px-4 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="logo-container">
+                    <img src="images/fırat-mobil-logo.JPG" alt="logo">
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html"
+                    class="nav-item text-white font-medium hover:text-accent transition-colors duration-300 active">Ana
+                    Sayfa</a>
+                <a href="hakkimizda.html"
+                    class="nav-item text-white font-medium hover:text-accent transition-colors duration-300">Hakkımızda</a>
+
+                <div class="dropdown relative">
+                    <button
+                        class="nav-item text-white font-medium hover:text-accent transition-colors duration-300 flex items-center">
+                        Hizmetlerimiz <i class="ri-arrow-down-s-line ml-1"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="vinc-yikama.html" class="hover:bg-light">VİNÇ YIKAMA</a>
+                        <a href="asfalt-ve-yol-makineleri-yikama.html" class="hover:bg-light">ASFALT VE YOL MAKİNELERİ YIKAMA</a>
+                        <a href="tünel-ve-maden-makineleri-yikama.html" class="hover:bg-light">TÜNEL VE MADEN MAKİNELERİ YIKAMA</a>
+                        <a href="tir-kamyon-otobüs-yikama.html" class="hover:bg-light">TIR KAMYON OTOBÜS OTOMOBİL YIKAMA</a>
+                        <a href="is-makine-yikama.html" class="hover:bg-light">İŞ MAKİNESİ YIKAMA</a>
+                    </div>
+                </div>
+
+                <a href="iletisim.html"
+                    class="nav-item text-white font-medium hover:text-accent transition-colors duration-300">İletişim</a>
+            </div>
+
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-white w-10 h-10 flex items-center justify-center">
+                    <i class="ri-menu-line ri-2x"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu"
+            class="mobile-menu fixed top-20 right-0 w-full h-screen gradient-bg bg-opacity-95 z-40 md:hidden">
+            <div class="flex flex-col items-center pt-10 space-y-6">
+                <a href="index.html"
+                    class="nav-item text-white text-xl font-medium hover:text-accent transition-colors duration-300">Ana
+                    Sayfa</a>
+                <a href="hakkimizda.html"
+                    class="nav-item text-white text-xl font-medium hover:text-accent transition-colors duration-300">Hakkımızda</a>
+
+                <div class="w-full text-center">
+                    <button id="mobile-services-button"
+                        class="nav-item text-white text-xl font-medium hover:text-accent transition-colors duration-300 flex items-center justify-center mx-auto">
+                        Hizmetlerimiz <i class="ri-arrow-down-s-line ml-1"></i>
+                    </button>
+                    <div id="mobile-services-menu" class="hidden w-full mt-2 pl-8">
+                        <a href="vinc-yikama.html" class="block py-2 text-white/80 hover:text-accent">VİNÇ YIKAMA</a>
+                        <a href="asfalt-ve-yol-makineleri-yikama.html"
+                            class="block py-2 text-white/80 hover:text-accent">ASFALT VE YOL MAKİNELERİ YIKAMA</a>
+                        <a href="tünel-ve-maden-makineleri-yikama.html"
+                            class="block py-2 text-white/80 hover:text-accent">TÜNEL VE MADEN MAKİNELERİ YIKAMA</a>
+                        <a href="tir-kamyon-otobüs-yikama.html" class="block py-2 text-white/80 hover:text-accent">TIR KAMYON OTOBÜS OTOMOBİL YIKAMA</a>
+                        <a href="is-makine-yikama.html" class="block py-2 text-white/80 hover:text-accent">İŞ MAKİNESİ YIKAMA</a>
+                    </div>
+                </div>
+
+                <a href="iletisim.html"
+                    class="nav-item text-white text-xl font-medium hover:text-accent transition-colors duration-300">İletişim</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="pt-32 pb-20 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 font-heading">Hakkımızda</h1>
+                <p class="text-lg text-white/80">İş makineleri yıkama sektöründe uzmanlaşmış ekibimizle,
+                    ekipmanlarınızın ömrünü uzatan ve verimliliğini artıran profesyonel çözümler sunuyoruz.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="images/hakkimizda.png"
+                        alt="Firma Hakkında" class="rounded-lg shadow-xl w-full h-auto object-cover">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold text-primary mb-6 font-heading">İş Makineleri Yıkama Sektöründe Lider
+                    </h2>
+                    <p class="text-secondary mb-6">
+                        Firmamız, iş makineleri yıkama ve detaylı temizlik alanında uzun yıllara dayanan deneyimiyle
+                        sektörde güvenin ve kalitenin adı olmuştur. İnşaat, hafriyat, tarım ve endüstriyel sektörlerde
+                        kullanılan tüm ağır ekipmanların profesyonelce temizlenmesini sağlıyor; makinelerin ömrünü
+                        uzatıyor ve performanslarını koruyoruz.
+                    </p>
+                    <p class="text-secondary mb-6">
+                        Alanında uzman ekibimiz ve endüstriyel temizlik ekipmanlarımızla, sadece yüzey temizliği değil,
+                        zorlu kir, yağ ve inatçı kalıntılardan arındırılmış detaylı bir temizlik sunuyoruz. Her iş
+                        makinesini kendi türüne göre değerlendiriyor, ihtiyaca özel çözümler üretiyoruz.
+                    </p>
+                    <p class="text-secondary mb-6">
+                        Tüm İstanbul genelinde hizmet veriyor, mobil ekiplerimizle dilediğiniz konuma gelerek hızlı ve
+                        etkili temizlik hizmeti sağlıyoruz. Müşteri memnuniyetini her şeyin önünde tutarak, düzenli
+                        bakım ve temizlik planlamasıyla makinelerinizi her zaman kullanıma hazır halde tutmanıza
+                        yardımcı oluyoruz.
+                    </p>
+                    <p class="text-secondary mb-6">
+                       Güvenilir, disiplinli ve çözüm odaklı yaklaşımımızla, iş makinelerinizin hijyenini ve verimliliğini bize emanet edebilirsiniz.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="bg-neutral p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-primary mb-2 font-heading">15+</h3>
+                            <p class="text-secondary">Yıllık Deneyim</p>
+                        </div>
+                        <div class="bg-neutral p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-primary mb-2 font-heading">5.000+</h3>
+                            <p class="text-secondary">Temizlenen Makine</p>
+                        </div>
+                    </div>
+                    <a href="iletisim.html"
+                        class="inline-block px-8 py-3 bg-accent text-white rounded-lg font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Bizimle
+                        İletişime Geçin</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-neutral">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-6 font-heading">Neden Bizi Tercih Etmelisiniz?</h2>
+                <p class="text-secondary">İş makineleri yıkama konusundaki uzmanlığımız ve müşteri odaklı yaklaşımımız
+                    bizi sektörde öne çıkarıyor.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg mv-card">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-flag-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4 font-heading">Misyonumuz</h3>
+                    <p class="text-secondary">
+                        İş makinelerinin temizliğinde sektör standartlarını belirleyerek, müşterilerimize ekipman ömrünü
+                        uzatan ve operasyonel verimliliği artıran profesyonel çözümler sunmak.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg mv-card">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-eye-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4 font-heading">Vizyonumuz</h3>
+                    <p class="text-secondary">
+                        Türkiye'nin önde gelen iş makinesi yıkama hizmeti sağlayıcısı olarak, uluslararası standartlarda
+                        hizmet veren ve sektörde yenilikçi çözümler geliştiren bir marka olmak.
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg mv-card">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-heart-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4 font-heading">Değerlerimiz</h3>
+                    <ul class="space-y-2 text-secondary">
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-accent mt-1 mr-2"></i>
+                            <span>Kaliteli ve güvenilir hizmet</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-accent mt-1 mr-2"></i>
+                            <span>Müşteri memnuniyeti odaklı yaklaşım</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-check-line text-accent mt-1 mr-2"></i>
+                            <span>Çevreye duyarlı uygulamalar</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 gradient-bg">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-heading">
+                Ekipmanlarınızı Profesyonel Ellere Emanet Edin
+            </h2>
+            <p class="text-white/80 max-w-2xl mx-auto mb-10">
+                İş makinelerinizin temizliği için uzman ekibimizle iletişime geçin. Size özel çözümler sunmaktan
+                mutluluk duyacağız.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="iletisim.html#teklif"
+                    class="px-8 py-4 bg-accent text-white rounded-lg font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Ücretsiz
+                    Teklif Alın</a>
+                <a href="tel:+905555555555"
+                    class="px-8 py-4 bg-white text-primary rounded-lg font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Bizi
+                    Arayın: (555) 555 55 55</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="professional-footer pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="logo-container">
+                            <img src="images/fırat-mobil-logo.JPG" alt="logo">
+                        </div>
+                        <span class="text-white text-xl font-bold font-logo">FIRAT MOBİL YIKAMA</span>
+                    </div>
+                    <p class="text-white/80 mb-6">
+                        Sektördeki 15 yılı aşkın tecrübemizle, ağır ekipman ve endüstriyel makine yıkama hizmetlerinde güvenilir çözüm ortağınızız. Müşteri memnuniyetini ön planda tutarak, en yeni teknolojiler ve çevre dostu ürünlerle kaliteli hizmet sunuyoruz.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white/80 hover:text-accent transition-colors duration-300"><i
+                                class="ri-facebook-fill ri-lg"></i></a>
+                        <a href="#" class="text-white/80 hover:text-accent transition-colors duration-300"><i
+                                class="ri-instagram-fill ri-lg"></i></a>
+                        <a href="#" class="text-white/80 hover:text-accent transition-colors duration-300"><i
+                                class="ri-linkedin-fill ri-lg"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Hızlı Linkler</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="index.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> Ana Sayfa
+                            </a>
+                        </li>
+                        <li>
+                            <a href="hakkimizda.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> Hakkımızda
+                            </a>
+                        </li>
+                        <li>
+                            <a href="hizmetlerimiz.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> Hizmetlerimiz
+                            </a>
+                        </li>
+                        <li>
+                            <a href="iletisim.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> İletişim
+                            </a>
+                        </li>
+                        <li>
+                            <a href="galeri.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> Galeri
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">İletişim Bilgileri</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <i class="ri-map-pin-line text-accent mr-3"></i>
+                            <span class="text-white/80">İstanbul, Türkiye</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-phone-line text-accent mr-3"></i>
+                            <span class="text-white/80">(555) 555 55 55</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-mail-line text-accent mr-3"></i>
+                            <span class="text-white/80">info@firatmobil.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/20 text-center">
+                <p class="text-white/70 text-sm">
+                    © 2025 Fırat Mobil Yıkama. Tüm hakları saklıdır.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileServicesButton = document.getElementById('mobile-services-button');
+            const mobileServicesMenu = document.getElementById('mobile-services-menu');
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                if (mobileMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-line');
+                }
+            });
+
+            // Toggle mobile services dropdown
+            if (mobileServicesButton) {
+                mobileServicesButton.addEventListener('click', function() {
+                    mobileServicesMenu.classList.toggle('hidden');
+                    const icon = mobileServicesButton.querySelector('i');
+                    if (mobileServicesMenu.classList.contains('hidden')) {
+                        icon.classList.remove('ri-arrow-up-s-line');
+                        icon.classList.add('ri-arrow-down-s-line');
+                    } else {
+                        icon.classList.remove('ri-arrow-down-s-line');
+                        icon.classList.add('ri-arrow-up-s-line');
+                    }
+                });
+            }
+
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    // Check if the clicked link is part of the services dropdown
+                    if (!link.closest('#mobile-services-menu')) {
+                        mobileMenu.classList.remove('active');
+                        mobileMenuButton.querySelector('i').classList.remove('ri-close-line');
+                        mobileMenuButton.querySelector('i').classList.add('ri-menu-line');
+                    }
+                });
+            });
+
+            // Active link highlighting for desktop navbar
+            const desktopNavItems = document.querySelectorAll('.nav-item');
+            const currentPath = window.location.pathname.split('/').pop();
+
+            desktopNavItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href && href.includes(currentPath)) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Active link highlighting for dropdown menu items
+            const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
+            dropdownLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.includes(currentPath)) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

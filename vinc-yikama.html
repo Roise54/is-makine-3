@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profesyonel Vinç Yıkama Hizmetleri | İş Makineleri Yıkamada</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1a365d",
+                        secondary: "#4a5568",
+                        accent: "#dd6b20",
+                        neutral: "#f7fafc",
+                        dark: "#2d3748",
+                        light: "#e2e8f0",
+                        success: "#38a169",
+                        warning: "#d69e2e",
+                        danger: "#e53e3e"
+                    },
+                    borderRadius: {
+                        none: "0px",
+                        sm: "4px",
+                        DEFAULT: "8px",
+                        md: "12px",
+                        lg: "16px",
+                        xl: "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        full: "9999px",
+                        button: "8px",
+                    },
+                    fontFamily: {
+                        sans: ['"Poppins"', 'sans-serif'],
+                        heading: ['"Montserrat"', 'sans-serif'],
+                        logo: ['"Roboto Condensed"', 'sans-serif']
+                    }
+                },
+            },
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Poppins:wght@400;600&family=Roboto+Condensed:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .hero-section {
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #dd6b20;
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .custom-input {
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .custom-input:focus {
+            border-color: #1a365d;
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .custom-button {
+            transition: all 0.3s ease;
+        }
+
+        .custom-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-item {
+            position: relative;
+        }
+
+        .stats-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background-color: rgba(74, 85, 104, 0.3);
+        }
+
+        .stats-item:last-child::after {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .stats-item::after {
+                display: none;
+            }
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+        }
+
+        .modern-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .modern-card:hover {
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #dd6b20;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .animated-underline:hover::after {
+            transform: scaleX(1);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 280px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            border-radius: 8px;
+            padding: 10px 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            color: #1a365d;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #dd6b20;
+            transition: width 0.3s ease;
+        }
+
+        .dropdown-menu a:hover::before {
+            width: 100%;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f7fafc;
+            color: #1a365d;
+            padding-left: 20px;
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .call-button {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #dd6b20;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .call-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .before-after-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .before-after-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .before-after-container .before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .before-after-container .before img {
+            width: auto;
+            height: 100%;
+            max-width: none;
+        }
+
+        .before-after-container .slider-handle {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background-color: white;
+            cursor: ew-resize;
+            z-index: 10;
+            transform: translateX(-50%);
+        }
+
+        .before-after-container .slider-handle::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .before-after-container .slider-handle::before {
+            content: '↔';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #dd6b20;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .before-after-labels {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 5;
+        }
+
+        .before-after-labels span {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* LOGO BOYUTLARINI BÜYÜTTÜM - ESKİSİ: width:50px height:50px */
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            background-color: #dd6b20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .professional-footer {
+            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+            border-top: 4px solid #dd6b20;
+        }
+
+        .footer-link {
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #dd6b20;
+            transform: translateX(5px);
+        }
+
+        /* GÜNCELLENMİŞ VIDEO GALERİ STİLLERİ - 2 ÜSTTE 2 ALTTA */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .video-item {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-container {
+            position: relative;
+            aspect-ratio: 9/16;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+        }
+
+        .video-container:hover .video-controls {
+            opacity: 1;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            height: 4px;
+            background: #ddd;
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #dd6b20;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .time {
+            font-family: monospace;
+            color: white;
+            font-size: 12px;
+        }
+
+        .video-play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(221, 107, 32, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .video-play-icon:hover {
+            background-color: rgba(221, 107, 32, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-play-icon i {
+            color: white;
+            font-size: 24px;
+            margin-left: 4px;
+        }
+
+        #videoModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #videoModal video {
+            width: 100%;
+            max-width: 800px;
+            max-height: 80vh;
+        }
+
+        #closeModal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .video-gallery {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .video-play-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .video-controls {
+                padding: 6px;
+                font-size: 14px;
+            }
+
+            .volume-slider {
+                width: 60px;
+            }
+
+            .logo-container {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        /* Hero Section */
+        .crane-hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.8)),
+                url('images/vinc-yikama-full.png');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0;
+            color: white;
+        }
+
+        /* Process Steps */
+        .process-step {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 40px;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #e2e8f0;
+        }
+
+        .process-step:last-child::before {
+            display: none;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+            background: white;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-neutral font-sans text-secondary">
+    <a href="https://wa.me/905555555555?text=Merhaba,vinç%20yıkama%20hakkında%20bilgi%20almak%20istiyordum."
+        class="whatsapp-button" target="_blank">
+        <i class="ri-whatsapp-fill"></i>
+    </a>
+
+    <a href="tel:+905555555555" class="call-button">
+        <i class="ri-phone-fill"></i>
+    </a>
+
+    <header class="fixed top-0 left-0 w-full h-20 gradient-bg bg-opacity-95 z-50 shadow-md">
+        <nav class="container mx-auto px-4 h-full flex items-center justify-between">
+            <div class="flex items-center">
+                <div class="logo-container">
+                    <img src="images/fırat-mobil-logo.JPG" alt="logo">
+                </div>
+                <span class="text-white text-xl font-bold font-logo">FIRAT MOBİL YIKAMA</span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html"
+                    class="nav-item text-white font-medium hover:text-accent transition-colors duration-300">Ana
+                    Sayfa</a>
+                <a href="hakkimizda.html"
+                    class="nav-item text-white font-medium hover:text-accent transition-colors duration-300">Hakkımızda</a>
+
+                <div class="dropdown relative">
+                    <button
+                        class="nav-item text-white font-medium hover:text-accent transition-colors duration-300 flex items-center active">
+                        Hizmetlerimiz <i class="ri-arrow-down-s-line ml-1"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="vinc-yikama.html" class="hover:bg-light">VİNÇ YIKAMA</a>
+                        <a href="asfalt-ve-yol-makineleri-yikama.html" class="hover:bg-light">ASFALT VE YOL MAKİNELERİ
+                            YIKAMA</a>
+                        <a href="tünel-ve-maden-makineleri-yikama.html" class="hover:bg-light">TÜNEL VE MADEN MAKİNELERİ
+                            YIKAMA</a>
+                        <a href="tir-kamyon-otobüs-yikama.html" class="hover:bg-light">TIR KAMYON OTOBÜS OTOMOBİL
+                            YIKAMA</a>
+                        <a href="is-makine-yikama.html" class="hover:bg-light">İŞ MAKİNESİ YIKAMA</a>
+                    </div>
+                </div>
+
+                <a href="iletisim.html"
+                    class="nav-item text-white font-medium hover:text-accent transition-colors duration-300">İletişim</a>
+            </div>
+
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-white w-10 h-10 flex items-center justify-center">
+                    <i class="ri-menu-line ri-2x"></i>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu"
+            class="mobile-menu fixed top-20 right-0 w-full h-screen gradient-bg bg-opacity-95 z-40 md:hidden">
+            <div class="flex flex-col items-center pt-10 space-y-6">
+                <a href="index.html"
+                    class="nav-item text-white text-xl font-medium hover:text-accent transition-colors duration-300">Ana
+                    Sayfa</a>
+                <a href="hakkimizda.html"
+                    class="nav-item text-white text-xl font-medium hover:text-accent transition-colors duration-300">Hakkımızda</a>
+
+                <div class="w-full text-center">
+                    <button id="mobile-services-button"
+                        class="nav-item text-white text-xl font-medium hover:text-accent transition-colors duration-300 flex items-center justify-center mx-auto">
+                        Hizmetlerimiz <i class="ri-arrow-down-s-line ml-1"></i>
+                    </button>
+                    <div id="mobile-services-menu" class="hidden w-full mt-2 pl-8">
+                        <a href="vinc-yikama.html" class="block py-2 text-white/80 hover:text-accent">VİNÇ YIKAMA</a>
+                        <a href="asfalt-ve-yol-makineleri-yikama.html"
+                            class="block py-2 text-white/80 hover:text-accent">ASFALT VE YOL MAKİNELERİ YIKAMA</a>
+                        <a href="tünel-ve-maden-makineleri-yikama.html"
+                            class="block py-2 text-white/80 hover:text-accent">TÜNEL VE MADEN MAKİNELERİ YIKAMA</a>
+                        <a href="tir-kamyon-otobüs-yikama.html" class="block py-2 text-white/80 hover:text-accent">TIR
+                            KAMYON OTOBÜS OTOMOBİL YIKAMA</a>
+                        <a href="is-makine-yikama.html" class="block py-2 text-white/80 hover:text-accent">İŞ MAKİNESİ
+                            YIKAMA</a>
+                    </div>
+                </div>
+
+                <a href="iletisim.html"
+                    class="nav-item text-white text-xl font-medium hover:text-accent transition-colors duration-300">İletişim</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="crane-hero">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Profesyonel Vinç Yıkama Hizmetleri</h1>
+                <p class="text-xl mb-8 opacity-90">Mobil ve sabit vinçleriniz için özel temizlik çözümleri. Yüksek
+                    basınçlı sistemlerle tüm vinç bileşenlerinin derinlemesine temizliği.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="images/vinc-yikama.png" alt="Vinç Yıkama"
+                        class="rounded-lg shadow-xl w-full h-auto object-cover floating">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold text-primary mb-6">Vinçleriniz İçin Özel Temizlik Çözümleri</h2>
+                    <p class="text-secondary mb-6">
+                        Vinçler, ağır işlerde kullanılan ve sürekli olarak toz, kir, yağ ve diğer kalıntılara maruz
+                        kalan ekipmanlardır. Profesyonel vinç yıkama hizmetimizle, ekipmanınızın hem görsel açıdan
+                        temiz olmasını hem de mekanik bileşenlerinin korunmasını sağlıyoruz.
+                    </p>
+                    <p class="text-secondary mb-6">
+                        Uzman ekibimiz, vinçlerin yapısını ve temizlik ihtiyaçlarını çok iyi bilmektedir. Her bir vinç
+                        modeline özel temizlik protokolleri uygulayarak, ekipmanınıza zarar vermeden en etkili temizliği
+                        gerçekleştiriyoruz.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-fill text-accent mr-2"></i>
+                            <span>Hidrolik sistem temizliği</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-fill text-accent mr-2"></i>
+                            <span>Korozyon önleyici uygulamalar</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-fill text-accent mr-2"></i>
+                            <span>Yüksek basınçlı yıkama</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-fill text-accent mr-2"></i>
+                            <span>Çevre dostu temizlik ürünleri</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-6">Vinç Yıkama Sürecimiz</h2>
+                <p class="text-secondary">Profesyonel vinç yıkama hizmetimiz, titizlikle planlanmış adımlardan
+                    oluşmaktadır.</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Ön Değerlendirme</h3>
+                    <p class="text-secondary">Vinç üzerindeki kirlilik seviyesi ve özel temizlik gerektiren bölgeler
+                        belirlenir. Ekipmanın durumuna göre en uygun temizlik yöntemleri seçilir.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Ön Yıkama</h3>
+                    <p class="text-secondary">Yüksek basınçlı su ile vinç üzerindeki büyük kir ve kalıntılar
+                        uzaklaştırılır. Bu aşamada özel fırçalar da kullanılabilir.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Özel Temizlik Uygulamaları</h3>
+                    <p class="text-secondary">Hidrolik sistemler, kabin içi, motor bölümü gibi özel alanlara yönelik
+                        detaylı temizlik yapılır. Yağ ve gres çözücüler kullanılır.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Koruyucu Uygulamalar</h3>
+                    <p class="text-secondary">Temizlik sonrası metal yüzeylerde korozyonu önleyici koruyucu
+                        uygulamalar yapılır. Bu sayede vinç ömrü uzatılır.</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Kalite Kontrol</h3>
+                    <p class="text-secondary">Tüm temizlik süreci kontrol edilir ve müşteri memnuniyeti sağlanır.
+                        Gerekli görülen bölgelerde ek temizlik yapılır.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-6">Vinç Yıkama Hizmetimizin Avantajları</h2>
+                <p class="text-secondary">Profesyonel vinç yıkama hizmetimizle elde edeceğiniz avantajlar</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card p-8 rounded-lg">
+                    <div
+                        class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-shield-star-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Ekipman Ömrünü Uzatır</h3>
+                    <p class="text-secondary">
+                        Düzenli profesyonel temizlik, vinçlerinizin ömrünü uzatır ve bakım maliyetlerini düşürür.
+                        Korozyon ve aşınmayı önler.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-lg">
+                    <div
+                        class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-zoom-in-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Erken Arıza Tespiti</h3>
+                    <p class="text-secondary">
+                        Temizlik sırasında olası sızıntılar, çatlaklar veya aşınmalar erken tespit edilir. Böylece
+                        büyük arızalar önlenir.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-lg">
+                    <div
+                        class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-user-star-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Profesyonel Görünüm</h3>
+                    <p class="text-secondary">
+                        Temiz vinçler, şirketinizin profesyonel imajını güçlendirir. Müşterileriniz ve iş ortaklarınız
+                        üzerinde olumlu etki bırakır.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-lg">
+                    <div
+                        class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-leaf-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Çevre Dostu</h3>
+                    <p class="text-secondary">
+                        Çevreye duyarlı temizlik ürünleri kullanıyoruz. Atık su yönetimi ile doğaya zarar vermeden
+                        temizlik yapıyoruz.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-lg">
+                    <div
+                        class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-time-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Zaman Tasarrufu</h3>
+                    <p class="text-secondary">
+                        Profesyonel ekip ve ekipmanlarımızla, vinç temizliğini hızlı ve etkili şekilde
+                        gerçekleştiriyoruz. Zaman kaybınız olmaz.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-lg">
+                    <div
+                        class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6 text-accent">
+                        <i class="ri-shield-check-line text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Güvenlik</h3>
+                    <p class="text-secondary">
+                        Temiz vinçler daha güvenlidir. Kaygan yüzeyler, biriken kir ve yağlar temizlenerek kaza riski
+                        azaltılır.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="professional-footer pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="logo-container">
+                            <img src="images/fırat-mobil-logo.JPG" alt="logo">
+                        </div>
+                        <span class="text-white text-xl font-bold font-logo">FIRAT MOBİL YIKAMA</span>
+                    </div>
+                    <p class="text-white/80 mb-6">
+                        Sektördeki 15 yılı aşkın tecrübemizle, ağır ekipman ve endüstriyel makine yıkama hizmetlerinde güvenilir çözüm ortağınızız. Müşteri memnuniyetini ön planda tutarak, en yeni teknolojiler ve çevre dostu ürünlerle kaliteli hizmet sunuyoruz.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white/80 hover:text-accent transition-colors duration-300"><i
+                                class="ri-facebook-fill ri-lg"></i></a>
+                        <a href="#" class="text-white/80 hover:text-accent transition-colors duration-300"><i
+                                class="ri-instagram-fill ri-lg"></i></a>
+                        <a href="#" class="text-white/80 hover:text-accent transition-colors duration-300"><i
+                                class="ri-linkedin-fill ri-lg"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Hızlı Linkler</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="index.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> Ana Sayfa
+                            </a>
+                        </li>
+                        <li>
+                            <a href="hakkimizda.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> Hakkımızda
+                            </a>
+                        </li>
+                        <li>
+                            <a href="hizmetlerimiz.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> Hizmetlerimiz
+                            </a>
+                        </li>
+                        <li>
+                            <a href="iletisim.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> İletişim
+                            </a>
+                        </li>
+                        <li>
+                            <a href="galeri.html"
+                                class="footer-link flex items-center text-white/80 hover:text-accent">
+                                <i class="ri-arrow-right-s-line mr-2"></i> Galeri
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">İletişim Bilgileri</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <i class="ri-map-pin-line text-accent mr-3"></i>
+                            <span class="text-white/80">İstanbul, Türkiye</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-phone-line text-accent mr-3"></i>
+                            <span class="text-white/80">(555) 555 55 55</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-mail-line text-accent mr-3"></i>
+                            <span class="text-white/80">info@firatmobil.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/20 text-center">
+                <p class="text-white/70 text-sm">
+                    © 2025 Fırat Mobil Yıkama. Tüm hakları saklıdır.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileServicesButton = document.getElementById('mobile-services-button');
+            const mobileServicesMenu = document.getElementById('mobile-services-menu');
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                const icon = mobileMenuButton.querySelector('i');
+                if (mobileMenu.classList.contains('active')) {
+                    icon.classList.remove('ri-menu-line');
+                    icon.classList.add('ri-close-line');
+                } else {
+                    icon.classList.remove('ri-close-line');
+                    icon.classList.add('ri-menu-line');
+                }
+            });
+
+            // Toggle mobile services dropdown
+            if (mobileServicesButton) {
+                mobileServicesButton.addEventListener('click', function() {
+                    mobileServicesMenu.classList.toggle('hidden');
+                    const icon = mobileServicesButton.querySelector('i');
+                    if (mobileServicesMenu.classList.contains('hidden')) {
+                        icon.classList.remove('ri-arrow-up-s-line');
+                        icon.classList.add('ri-arrow-down-s-line');
+                    } else {
+                        icon.classList.remove('ri-arrow-down-s-line');
+                        icon.classList.add('ri-arrow-up-s-line');
+                    }
+                });
+            }
+
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    // Check if the clicked link is part of the services dropdown
+                    if (!link.closest('#mobile-services-menu')) {
+                        mobileMenu.classList.remove('active');
+                        const icon = mobileMenuButton.querySelector('i');
+                        icon.classList.remove('ri-close-line');
+                        icon.classList.add('ri-menu-line');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
