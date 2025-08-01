@@ -2,6 +2,8 @@
 <html lang="tr">
 
 <head>
+    <link rel="icon" href="../is-makine/images/favicon-32x32.png" type="image/x-icon">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesyonel Ağır Ekipman Yıkama Hizmetleri | Endüstriyel Temizlik Çözümleri</title>
@@ -359,12 +361,15 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             border-radius: 8px;
             overflow: hidden;
+            touch-action: none; /* Mobil dokunmatik için önemli */
         }
 
         .before-after-container img {
             width: 100%;
             height: auto;
             display: block;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .before-after-container .before {
@@ -374,12 +379,14 @@
             width: 50%;
             height: 100%;
             overflow: hidden;
+            pointer-events: none; /* Mobil dokunmatik için önemli */
         }
 
         .before-after-container .before img {
             width: auto;
             height: 100%;
             max-width: none;
+            pointer-events: none;
         }
 
         .before-after-container .slider-handle {
@@ -392,6 +399,7 @@
             cursor: ew-resize;
             z-index: 10;
             transform: translateX(-50%);
+            touch-action: none; /* Mobil dokunmatik için önemli */
         }
 
         .before-after-container .slider-handle::after {
@@ -408,6 +416,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: none;
         }
 
         .before-after-container .slider-handle::before {
@@ -481,7 +490,7 @@
             overflow: hidden;
         }
 
-        .video-container video {
+        .video-container iframe {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -621,6 +630,21 @@
             .logo-container {
                 width: 60px;
                 height: 60px;
+            }
+
+            /* Mobil için özel stiller */
+            .before-after-container {
+                max-width: 100%;
+                margin: 20px auto;
+            }
+
+            .before-after-container .slider-handle {
+                width: 6px;
+            }
+
+            .before-after-container .slider-handle::after {
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
@@ -1108,36 +1132,82 @@
             mobileServicesMenu.classList.toggle('hidden');
         });
 
-        // Before-After Slider
+        // Before-After Slider - GÜNCELLENMİŞ MOBİL DESTEKLİ SÜRÜM
         const beforeAfterContainer = document.querySelector('.before-after-container');
         const beforeImage = document.querySelector('.before-image');
         const sliderHandle = document.querySelector('.slider-handle');
 
         let isDragging = false;
+        let startX = 0;
+        let startWidth = 0;
 
         if (sliderHandle) {
-            sliderHandle.addEventListener('mousedown', () => {
+            // Mouse events for desktop
+            sliderHandle.addEventListener('mousedown', (e) => {
                 isDragging = true;
+                startX = e.clientX;
+                startWidth = parseInt(window.getComputedStyle(beforeImage).width, 10);
                 beforeAfterContainer.classList.add('resizing');
+                e.preventDefault();
             });
 
+            // Touch events for mobile
+            sliderHandle.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                startWidth = parseInt(window.getComputedStyle(beforeImage).width, 10);
+                beforeAfterContainer.classList.add('resizing');
+                e.preventDefault();
+            });
+
+            // Mouse move for desktop
             document.addEventListener('mousemove', (e) => {
                 if (!isDragging) return;
-
-                let x = e.clientX - beforeAfterContainer.getBoundingClientRect().left;
-                let width = beforeAfterContainer.offsetWidth;
-
-                if (x < 0) x = 0;
-                if (x > width) x = width;
-
-                beforeImage.style.width = x + 'px';
-                sliderHandle.style.left = x + 'px';
+                
+                const containerRect = beforeAfterContainer.getBoundingClientRect();
+                let x = e.clientX - containerRect.left;
+                
+                // Limit within container bounds
+                x = Math.max(0, Math.min(x, containerRect.width));
+                
+                const percent = (x / containerRect.width) * 100;
+                beforeImage.style.width = `${percent}%`;
+                sliderHandle.style.left = `${percent}%`;
             });
 
+            // Touch move for mobile
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                
+                const containerRect = beforeAfterContainer.getBoundingClientRect();
+                let x = e.touches[0].clientX - containerRect.left;
+                
+                // Limit within container bounds
+                x = Math.max(0, Math.min(x, containerRect.width));
+                
+                const percent = (x / containerRect.width) * 100;
+                beforeImage.style.width = `${percent}%`;
+                sliderHandle.style.left = `${percent}%`;
+            });
+
+            // Mouse up for desktop
             document.addEventListener('mouseup', () => {
                 isDragging = false;
                 beforeAfterContainer.classList.remove('resizing');
             });
+
+            // Touch end for mobile
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+                beforeAfterContainer.classList.remove('resizing');
+            });
+
+            // Prevent default touch behavior
+            document.addEventListener('touchstart', (e) => {
+                if (e.target === sliderHandle || e.target === beforeAfterContainer) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
         }
 
         // Video Kontrolleri ve Modal İşlevselliği
@@ -1159,115 +1229,133 @@
                 const playIcon = container.querySelector('.video-play-icon');
 
                 // Oynat/Duraklat butonu
-                playPauseBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    togglePlayPause();
-                });
+                if (playPauseBtn) {
+                    playPauseBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        togglePlayPause();
+                    });
+                }
 
                 // Video üzerine tıklandığında
-                container.addEventListener('click', () => {
-                    if (video.paused) {
-                        video.play();
-                        playIcon.style.display = 'none';
-                        playPauseBtn.innerHTML = '<i class="ri-pause-fill"></i>';
-                    } else {
-                        video.pause();
-                        playIcon.style.display = 'flex';
-                        playPauseBtn.innerHTML = '<i class="ri-play-fill"></i>';
-                    }
-                });
+                if (container) {
+                    container.addEventListener('click', () => {
+                        if (video.paused) {
+                            video.play();
+                            if (playIcon) playIcon.style.display = 'none';
+                            if (playPauseBtn) playPauseBtn.innerHTML = '<i class="ri-pause-fill"></i>';
+                        } else {
+                            video.pause();
+                            if (playIcon) playIcon.style.display = 'flex';
+                            if (playPauseBtn) playPauseBtn.innerHTML = '<i class="ri-play-fill"></i>';
+                        }
+                    });
+                }
 
                 // Play icon tıklandığında
-                playIcon.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    video.play();
-                    playIcon.style.display = 'none';
-                    playPauseBtn.innerHTML = '<i class="ri-pause-fill"></i>';
-                });
+                if (playIcon) {
+                    playIcon.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        video.play();
+                        playIcon.style.display = 'none';
+                        if (playPauseBtn) playPauseBtn.innerHTML = '<i class="ri-pause-fill"></i>';
+                    });
+                }
 
                 // Video oynatma durumu değiştiğinde
                 video.addEventListener('play', () => {
-                    playIcon.style.display = 'none';
-                    playPauseBtn.innerHTML = '<i class="ri-pause-fill"></i>';
+                    if (playIcon) playIcon.style.display = 'none';
+                    if (playPauseBtn) playPauseBtn.innerHTML = '<i class="ri-pause-fill"></i>';
                 });
 
                 video.addEventListener('pause', () => {
-                    playIcon.style.display = 'flex';
-                    playPauseBtn.innerHTML = '<i class="ri-play-fill"></i>';
+                    if (playIcon) playIcon.style.display = 'flex';
+                    if (playPauseBtn) playPauseBtn.innerHTML = '<i class="ri-play-fill"></i>';
                 });
 
                 // Ses kontrolü
-                muteBtn.addEventListener('click', () => {
-                    video.muted = !video.muted;
-                    muteBtn.innerHTML = video.muted ?
-                        '<i class="ri-volume-mute-fill"></i>' :
-                        '<i class="ri-volume-up-fill"></i>';
-                });
+                if (muteBtn) {
+                    muteBtn.addEventListener('click', () => {
+                        video.muted = !video.muted;
+                        muteBtn.innerHTML = video.muted ?
+                            '<i class="ri-volume-mute-fill"></i>' :
+                            '<i class="ri-volume-up-fill"></i>';
+                    });
+                }
 
-                volumeSlider.addEventListener('input', () => {
-                    video.volume = volumeSlider.value;
-                    video.muted = false;
-                    muteBtn.innerHTML = '<i class="ri-volume-up-fill"></i>';
-                });
+                if (volumeSlider) {
+                    volumeSlider.addEventListener('input', () => {
+                        video.volume = volumeSlider.value;
+                        video.muted = false;
+                        if (muteBtn) muteBtn.innerHTML = '<i class="ri-volume-up-fill"></i>';
+                    });
+                }
 
                 // Süre güncelleme
                 video.addEventListener('loadedmetadata', () => {
-                    duration.textContent = formatTime(video.duration);
+                    if (duration) duration.textContent = formatTime(video.duration);
                 });
 
                 video.addEventListener('timeupdate', () => {
-                    currentTime.textContent = formatTime(video.currentTime);
+                    if (currentTime) currentTime.textContent = formatTime(video.currentTime);
                 });
 
                 // Tam ekran modu için tıklama
-                container.addEventListener('dblclick', () => {
-                    openFullscreenVideo(video);
-                });
+                if (container) {
+                    container.addEventListener('dblclick', () => {
+                        openFullscreenVideo(video);
+                    });
+                }
 
                 // Video sona erdiğinde
                 video.addEventListener('ended', () => {
-                    playIcon.style.display = 'flex';
-                    playPauseBtn.innerHTML = '<i class="ri-play-fill"></i>';
+                    if (playIcon) playIcon.style.display = 'flex';
+                    if (playPauseBtn) playPauseBtn.innerHTML = '<i class="ri-play-fill"></i>';
                     video.currentTime = 0;
                 });
 
                 function togglePlayPause() {
                     if (video.paused) {
                         video.play();
-                        playPauseBtn.innerHTML = '<i class="ri-pause-fill"></i>';
+                        if (playPauseBtn) playPauseBtn.innerHTML = '<i class="ri-pause-fill"></i>';
                     } else {
                         video.pause();
-                        playPauseBtn.innerHTML = '<i class="ri-play-fill"></i>';
+                        if (playPauseBtn) playPauseBtn.innerHTML = '<i class="ri-play-fill"></i>';
                     }
                 }
             });
 
             // Modal kapatma
-            closeModal.addEventListener('click', () => {
-                modalVideo.pause();
-                videoModal.style.display = 'none';
-            });
+            if (closeModal) {
+                closeModal.addEventListener('click', () => {
+                    if (modalVideo) modalVideo.pause();
+                    videoModal.style.display = 'none';
+                });
+            }
 
             // Modal dışına tıklanırsa kapat
-            videoModal.addEventListener('click', (e) => {
-                if (e.target === videoModal) {
-                    modalVideo.pause();
-                    videoModal.style.display = 'none';
-                }
-            });
+            if (videoModal) {
+                videoModal.addEventListener('click', (e) => {
+                    if (e.target === videoModal) {
+                        if (modalVideo) modalVideo.pause();
+                        videoModal.style.display = 'none';
+                    }
+                });
+            }
 
             // Tam ekran video açma fonksiyonu
             function openFullscreenVideo(videoElement) {
-                modalVideo.src = videoElement.currentSrc;
-                modalVideo.currentTime = videoElement.currentTime;
-                modalVideo.volume = videoElement.volume;
-                modalVideo.muted = videoElement.muted;
+                if (modalVideo) {
+                    modalVideo.src = videoElement.currentSrc;
+                    modalVideo.currentTime = videoElement.currentTime;
+                    modalVideo.volume = videoElement.volume;
+                    modalVideo.muted = videoElement.muted;
 
-                if (!videoElement.paused) {
-                    modalVideo.play();
+                    if (!videoElement.paused) {
+                        modalVideo.play();
+                    }
+
+                    videoModal.style.display = 'flex';
                 }
-
-                videoModal.style.display = 'flex';
             }
 
             // Zaman formatlama fonksiyonu
